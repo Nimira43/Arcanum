@@ -3,6 +3,7 @@ package com.arcanumproject.arcanum.service;
 import com.arcanumproject.arcanum.exceptions.APIException;
 import com.arcanumproject.arcanum.exceptions.ResourceNotFoundException;
 import com.arcanumproject.arcanum.model.Category;
+import com.arcanumproject.arcanum.payload.CategoryResponse;
 import com.arcanumproject.arcanum.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories() {
+    public CategoryResponse getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
 
         if(categories.isEmpty())

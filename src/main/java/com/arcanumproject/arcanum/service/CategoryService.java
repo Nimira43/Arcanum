@@ -1,11 +1,12 @@
 package com.arcanumproject.arcanum.service;
 
 import com.arcanumproject.arcanum.model.Category;
+import com.arcanumproject.arcanum.payload.CategoryResponse;
 
 import java.util.List;
 
 public interface CategoryService {
-    List<Category> getAllCategories();
+    CategoryResponse getAllCategories();
     void createCategory(Category category);
 
     String deleteCategory(Long categoryId);
