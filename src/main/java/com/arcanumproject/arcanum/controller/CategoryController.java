@@ -1,6 +1,7 @@
 package com.arcanumproject.arcanum.controller;
 
 import com.arcanumproject.arcanum.model.Category;
+import com.arcanumproject.arcanum.payload.CategoryDTO;
 import com.arcanumproject.arcanum.payload.CategoryResponse;
 import com.arcanumproject.arcanum.service.CategoryService;
 import jakarta.validation.Valid;
@@ -8,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +26,9 @@ public class CategoryController {
 
     @PostMapping("/public/categories")
     //@RequestMapping(value = "/public/categories", method = RequestMethod.POST)
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
-        categoryService.createCategory(category);
-        return new ResponseEntity<>("Category added successfully.", HttpStatus.CREATED);
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+        CategoryDTO savedCategoryDTO = categoryService.createCategory(categoryDTO);
+        return new ResponseEntity<>(savedCategoryDTO, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/admin/categories/{categoryId}")
