@@ -1,5 +1,5 @@
 package com.arcanumproject.arcanum.controller;
-;
+
 import com.arcanumproject.arcanum.payload.CategoryDTO;
 import com.arcanumproject.arcanum.payload.CategoryResponse;
 import com.arcanumproject.arcanum.service.CategoryService;
@@ -16,8 +16,13 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/public/categories")
+    @GetMapping("/echo")
+//    public ResponseEntity<String> echoMessage(@RequestParam(name = "message", defaultValue = "This is Arcanum") String message){
+    public ResponseEntity<String> echoMessage(@RequestParam(name = "message", required = false) String message){
+        return new ResponseEntity<>("Echoed Message: " + message, HttpStatus.OK);
+    }
 
+    @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories() {
         CategoryResponse categoryResponse  = categoryService.getAllCategories();
         return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
