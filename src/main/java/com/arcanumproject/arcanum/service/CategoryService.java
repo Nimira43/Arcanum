@@ -5,7 +5,7 @@ import com.arcanumproject.arcanum.payload.CategoryDTO;
 import com.arcanumproject.arcanum.payload.CategoryResponse;
 
 public interface CategoryService {
-    CategoryResponse getAllCategories();
+    CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize);
     CategoryDTO createCategory(CategoryDTO categoryDTO);
 
     CategoryDTO deleteCategory(Long categoryId);
