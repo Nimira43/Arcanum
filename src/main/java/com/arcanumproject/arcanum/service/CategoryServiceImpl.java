@@ -27,8 +27,8 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) {
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize);
         Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
-        List<Category> categories = categoryPage.getContent();
 
+        List<Category> categories = categoryPage.getContent();
         if(categories.isEmpty())
             throw new APIException("No categories have been created yet.");
 
@@ -37,6 +37,11 @@ public class CategoryServiceImpl implements CategoryService {
                 .toList();
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent((categoryDTOS));
+        categoryResponse.setPageNumber(categoryPage.getNumber());
+        categoryResponse.setPageSize(categoryPage.getSize());
+        categoryResponse.setTotalElements(categoryPage.getTotalElements());
+        categoryResponse.setTotalpages(categoryPage.getTotalPages());
+        categoryResponse.setLastPage(categoryPage.isLast());
         return categoryResponse;
     }
 
