@@ -1,5 +1,6 @@
 package com.arcanumproject.arcanum.controller;
 
+import com.arcanumproject.arcanum.config.AppConstants;
 import com.arcanumproject.arcanum.payload.CategoryDTO;
 import com.arcanumproject.arcanum.payload.CategoryResponse;
 import com.arcanumproject.arcanum.service.CategoryService;
@@ -18,8 +19,8 @@ public class CategoryController {
 
     @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories(
-            @RequestParam(name = "pageNumber") Integer pageNumber,
-            @RequestParam(name = "pageSize") Integer pageSize
+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize
     ) {
         CategoryResponse categoryResponse  = categoryService.getAllCategories(pageNumber, pageSize);
         return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
